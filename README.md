@@ -1,6 +1,20 @@
-# Mordheim Laboratory
+<p align="center">
+  <img src="assets/mordheim-laboratory-emblem.svg" alt="Emblema de Mordheim Laboratory: dado alquímico y cometa de dos colas" width="120">
+</p>
 
-**Conoce tus posibilidades. Elige tu ventaja.**
+<h1 align="center">Mordheim Laboratory</h1>
+
+<p align="center">
+  <strong>Conoce tus posibilidades. Elige tu ventaja.</strong><br>
+  <em>Menos intuición. Más supervivencia en la Ciudad de los Condenados.</em>
+</p>
+
+<p align="center">
+  🎲 Probabilidades exactas &nbsp; · &nbsp; ⚔️ Combate cuerpo a cuerpo &nbsp; · &nbsp; 🛡️ Comparador de mejoras<br>
+  🇪🇸 En español &nbsp; · &nbsp; 📦 Sin instalación &nbsp; · &nbsp; 🌐 En tu navegador
+</p>
+
+---
 
 Laboratorio de combate cuerpo a cuerpo para Mordheim, en español. Configura dos combatientes, explora sus probabilidades y compara qué mejora aporta más frente a un rival concreto.
 
@@ -8,7 +22,7 @@ La herramienta calcula distribuciones de probabilidad mediante enumeración de d
 
 Es una web estática: no necesita instalación, base de datos, cuentas de usuario ni servidor de aplicación.
 
-## Qué puedes hacer
+## ✨ Qué puedes hacer
 
 - **Analizar un enfrentamiento:** probabilidad de causar heridas, heridas esperadas, distribución del daño y probabilidad de dejar al rival fuera de combate.
 - **Configurar ambos perfiles:** atributos, heridas restantes, armadura, arma principal, secundaria, Odio activo y Duro de matar.
@@ -17,7 +31,7 @@ Es una web estática: no necesita instalación, base de datos, cuentas de usuari
 - **Combinar variantes de campaña:** parada clásica u opcional, equipo básico o de campaña y cuatro modos de críticos.
 - **Consultar tablas:** impactar, herir, críticos, armadura, lesiones, parada y disparo. El disparo es solo de consulta; no forma parte del simulador.
 
-## Empezar
+## 🚀 Empezar
 
 ### Abrir directamente
 
@@ -42,7 +56,7 @@ Abre <http://localhost:8000>. Detén el servidor con `Ctrl+C`.
 
 Los cálculos se realizan en el navegador. Las fuentes de Google son opcionales y tienen alternativas de respaldo; sin conexión puede cambiar la tipografía, pero no el funcionamiento del laboratorio.
 
-## Guía rápida
+## 🧭 Guía rápida
 
 1. Abre **Reglas del enfrentamiento** y selecciona las variantes de tu campaña.
 2. Configura **A**, el atacante, y **B**, su objetivo.
@@ -61,9 +75,10 @@ Los cálculos se realizan en el navegador. Las fuentes de Google son opcionales 
 | Fuera de combate | Probabilidad de obtener ese resultado mediante las lesiones y los efectos especiales implementados. |
 | Distribución de heridas | Probabilidad de causar exactamente 0, 1, 2… heridas no salvadas, incluso por encima de las restantes. |
 
-**Agotar heridas no equivale a dejar fuera de combate.** Un combatiente que pierde su última herida puede quedar derribado o aturdido. La herramienta calcula por separado la probabilidad de quedar fuera de combate; no calcula muerte ni lesiones graves pospartida.
+> [!IMPORTANT]
+> **Agotar heridas no equivale a dejar fuera de combate.** Un combatiente que pierde su última herida puede quedar derribado o aturdido. La herramienta calcula por separado la probabilidad de quedar fuera de combate; no calcula muerte ni lesiones graves pospartida.
 
-## Configurar bien el equipo
+## 🛡️ Configurar bien el equipo
 
 ### Lo que debes introducir a mano
 
@@ -85,7 +100,7 @@ La Fuerza del perfil se utiliza para ambas armas y para comprobar si se puede pa
 
 Hay perfiles de armas de filo, contundentes, lanzas y alabardas, armas a dos manos, ataques naturales y un arma flexible genérica. Esta última no representa las reglas particulares de todas las armas flexibles.
 
-## Reglas y variantes
+## 📜 Reglas y variantes
 
 Las opciones se aplican a los dos combatientes y también al comparador.
 
@@ -111,11 +126,12 @@ Las variantes opcionales toman como referencia el *Reglamento Mordheim Finiquita
 
 Las tablas y sus ramas de probabilidad están implementadas en `criticals.js`: **no necesitas ningún PDF para usar el simulador ni consultar las tablas integradas**. Los PDF y las capturas locales están excluidos mediante `.gitignore`.
 
-**Limitación actual:** la interfaz conserva dos enlaces «Abrir Finiquitao» y «Abrir Códice» a archivos PDF locales. En una copia limpia del repositorio o en un despliegue sin esos documentos, esos enlaces no funcionan. Esto no afecta a los cálculos ni a las referencias integradas.
+> [!NOTE]
+> La interfaz conserva dos enlaces «Abrir Finiquitao» y «Abrir Códice» a archivos PDF locales. En una copia limpia del repositorio o en un despliegue sin esos documentos, esos enlaces no funcionan. Esto no afecta a los cálculos ni a las referencias integradas.
 
 Las familias compartidas por ambas variantes coinciden en sus efectos de heridas, armadura y lesiones. Las diferencias de desplazamiento de Empalado no se simulan. La variante avanzada añade flexibles y tablas de accidentes; proyectiles, caídas, explosiones y atropellos se muestran solo como referencia.
 
-## Comparar mejoras sin confundir resultados
+## ⚖️ Comparar mejoras sin confundir resultados
 
 Cada alternativa se aplica **de forma independiente** al perfil A, manteniendo el mismo rival B. No se acumulan las dos opciones ni se modifica el perfil original.
 
@@ -124,9 +140,10 @@ Cada alternativa se aplica **de forma independiente** al perfil A, manteniendo e
 - El comparador ajusta la armadura de la copia al añadir o retirar un escudo; el perfil original debe tener ya su salvación final correctamente introducida.
 - No se comparan costes en coronas ni se presupone que todas las opciones sean legales para cualquier banda.
 
-Una mejora de HA no siempre cambia la tirada para impactar. Su utilidad depende del enfrentamiento concreto, igual que la de la Fuerza, los ataques o la parada.
+> [!TIP]
+> Una mejora de HA no siempre cambia la tirada para impactar. Su utilidad depende del enfrentamiento concreto, igual que la de la Fuerza, los ataques o la parada.
 
-## Alcance y limitaciones
+## 🔎 Alcance y limitaciones
 
 El laboratorio estudia **fases de ataques**, no una batalla completa ni un duelo hasta que solo quede un superviviente.
 
@@ -140,7 +157,7 @@ El laboratorio estudia **fases de ataques**, no una batalla completa ni un duelo
 
 Comprueba siempre las reglas, erratas y acuerdos de tu grupo. La herramienta ayuda a comparar probabilidades dentro de su modelo; no sustituye al reglamento ni resuelve todas las interacciones posibles.
 
-## Estructura del proyecto
+## 🗂️ Estructura del proyecto
 
 | Archivo | Responsabilidad |
 | --- | --- |
@@ -155,7 +172,7 @@ Comprueba siempre las reglas, erratas y acuerdos de tu grupo. La herramienta ayu
 | `Schoensperger.otf` | Tipografía local del logotipo. |
 | `test.js` | Pruebas automatizadas, sin dependencias externas. |
 
-## Desarrollo y pruebas
+## 🧪 Desarrollo y pruebas
 
 Edita los archivos y recarga el navegador. No se necesita `npm install` ni un empaquetador.
 
@@ -169,11 +186,12 @@ Las pruebas incluyen casos analíticos, normalización de distribuciones, armas,
 
 Si cambias una regla, añade o ajusta un caso de prueba y revisa también las explicaciones visibles en la web. Antes de compartir cambios, comprueba tanto los resultados del motor como los selectores y el comparador en el navegador.
 
-## Publicación y acceso
+## 🌐 Publicación y acceso
 
 Puedes alojar los archivos en un servicio de hosting estático. La carpeta raíz contiene `index.html`; no hay comando de compilación ni backend que desplegar.
 
-**Un repositorio privado no convierte una web desplegada en privada.** El control de acceso depende del servicio de alojamiento y debe configurarse por separado. Si solo debe entrar un grupo de amigos, utiliza una solución que autentique a los visitantes, por ejemplo Cloudflare Pages con Cloudflare Access.
+> [!WARNING]
+> **Un repositorio privado no convierte una web desplegada en privada.** El control de acceso depende del servicio de alojamiento y debe configurarse por separado. Si solo debe entrar un grupo de amigos, utiliza una solución que autentique a los visitantes, por ejemplo Cloudflare Pages con Cloudflare Access.
 
 Antes de publicar:
 
@@ -183,6 +201,8 @@ Antes de publicar:
 - Comprueba las rutas, la carga de estilos y el funcionamiento en móvil.
 - Ejecuta `node test.js`.
 
-## Herramienta no oficial
+---
+
+## 🏷️ Herramienta no oficial
 
 Mordheim Laboratory es un proyecto no oficial, sin afiliación con Games Workshop. Las marcas y materiales de terceros pertenecen a sus respectivos titulares. La disponibilidad del código no implica permiso para redistribuir reglamentos, fuentes u otros recursos de terceros.
