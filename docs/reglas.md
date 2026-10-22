@@ -27,7 +27,7 @@ Una ficha puede recoger varios estados para aspectos distintos. No se marcará u
 | Parada opcional | ⬜ Pendiente | — |
 | Críticos básicos | ⬜ Pendiente | — |
 | Críticos opcionales y avanzados | ⬜ Pendiente | — |
-| Odio | ⬜ Pendiente | — |
+| Odio | ✅ Repetición de impactos verificada; 🔎 activación manual | [Ficha](#odio) |
 | Lesiones y Duro de matar | ⬜ Pendiente | — |
 | Orden de resolución e interacciones | ⬜ Pendiente | — |
 | Comparador de mejoras | ⬜ Pendiente | — |
@@ -93,6 +93,62 @@ El motor crea un grupo con `A` ataques de la principal y otro con exactamente un
 Texto preparado para comentar en la issue:
 
 > Primera regla revisada: segunda arma de una mano = un ataque adicional. Coincide con Mordheimer, sección «fighting with two weapons». Verificada en el motor, README e interfaz. Añadidas pruebas para A=1..6 y distribución binomial independiente; suite completa correcta. No se ha cambiado el motor. El resto de armas, restricciones e interacciones sigue pendiente. Detalles y referencia en docs/reglas.md, ficha «Segunda arma: un ataque adicional».
+
+### Odio
+
+**Estado:** ✅ Coincide para repetir los fallos al impactar en la fase analizada; 🔎 la primera ronda y la elegibilidad del rival se seleccionan manualmente.
+
+**Referencia:** [Mordheimer · Leadership & Psychology · hatred](https://mordheimer.net/docs/rules/leadership-psychology#hatred).
+
+**Edición o variante de la referencia:** reglas generales de psicología, aplicadas al combate cuerpo a cuerpo.
+
+**Fecha de consulta:** 2026-10-23.
+
+**Issue:** [#1 · Auditoría de reglas frente a Mordheimer](https://github.com/jlpdiez/Mordheim-Laboratory/issues/1).
+
+**Código principal:** `weapons.js` (`hitDieDistribution`, `attackGroups` y `calculateWeaponCombat`); `app.js` (casilla, explicaciones, intercambio y comparador); pruebas en `test.js`.
+
+#### Comportamiento actual y resultado del contraste
+
+Mordheimer permite repetir los fallos al impactar contra enemigos odiados en la primera ronda de cada combate cuerpo a cuerpo. Después se combate normalmente.
+
+Con «Odio activo», el motor conserva los impactos de la primera tirada y repite una vez los fallos. Aplica la distribución resultante tanto a la principal como a la secundaria. Para una probabilidad inicial de impacto `p`, el resultado es `p + (1-p) × p`:
+
+| Tirada para impactar | Sin Odio | Con Odio |
+| --- | --- | --- |
+| 3+ | 2/3 | 8/9 |
+| 4+ | 1/2 | 3/4 |
+| 5+ | 1/3 | 5/9 |
+
+Los dados finales se conservan para la parada clásica. El comparador mantiene el estado de Odio de cada perfil al calcular su fase ofensiva y al crear copias con mejoras; intercambiar perfiles también conserva la habilidad.
+
+**Conclusión:** la regla base ya estaba correctamente implementada. No se modifica el motor.
+
+#### Simplificaciones y alcance pendiente
+
+- La herramienta no sigue rondas ni identifica enemigos odiados: el usuario debe marcar la casilla solo cuando corresponda y desmarcarla después de la primera ronda. La interfaz y el README lo explican.
+- No se ha auditado qué bandas o habilidades conceden Odio ni sus posibles excepciones.
+- Conservar los dados finales comprueba la integración de Odio con la parada; no valida por sí solo todas las reglas de parada.
+- El motor también utiliza la probabilidad con Odio para el ataque adicional de Fuerte golpe. Existe una prueba de ese comportamiento, pero su regla opcional e interacciones siguen pendientes de contraste independiente. No se declaran verificados los críticos avanzados.
+- No hay simulación de disparos ni de combates completos con seguimiento de turnos.
+
+#### Pruebas de revisión
+
+- [x] Enumerar primera tirada y repetición para umbrales 3+, 4+ y 5+, comprobando cada cara final del dado y la normalización.
+- [x] Comprobar ambos estados de la casilla con tres ataques de principal y uno de secundaria, sin críticos, armadura o paradas: media `4q` y probabilidad de alguna herida `1-(1-q)^4`, donde `q=[p+(1-p)p]/2` con Odio y `q=p/2` sin él.
+- [x] Revisar las regresiones existentes de parada clásica con Odio y conservación de la habilidad al intercambiar perfiles.
+- [x] Revisar el flujo del comparador y la explicación de activación manual en la interfaz y README.
+- [x] Ejecutar `node test.js` y `git diff --check`.
+
+**Pruebas verificadas:** bloque «Hatred audit» de `test.js`. La revisión del comparador ha sido por inspección del código, no mediante una prueba visual del navegador.
+
+**Commit de resolución:** consultar el commit que incorpora esta ficha con `git log --oneline -- docs/reglas.md test.js`.
+
+**Seguimiento en la issue:** pendiente de publicar; no se dispone de autenticación de escritura para la API de GitHub en esta sesión.
+
+Texto preparado para comentar en la issue:
+
+> Odio revisado frente a Mordheimer, sección «hatred»: la repetición de fallos al impactar ya estaba bien implementada para ambas armas. Verificados los umbrales 3+, 4+ y 5+; añadidas pruebas independientes de daño con y sin Odio. La primera ronda y el enemigo odiado se controlan manualmente, como indica la interfaz. Suite completa correcta; sin cambios en el motor. Esta revisión no valida todas las interacciones con parada o críticos opcionales. Detalles en docs/reglas.md, ficha «Odio».
 
 ### Parada clásica
 

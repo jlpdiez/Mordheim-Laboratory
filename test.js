@@ -219,7 +219,8 @@ vm.runInContext('rules.parry="classic";update();',context);
 assert.ok(element('pipeline').innerHTML.includes('<strong>Variable</strong>'));
 vm.runInContext(`state=JSON.parse(${JSON.stringify(parryUiState)});`,context);
 vm.runInContext('state.a.secondary="none";update();',context);
-// Hatred: one reroll of failed hit dice, preserving final faces for parry.
+// Hatred audit: https://mordheimer.net/docs/rules/leadership-psychology#hatred
+// One reroll of failed hit dice, preserving final faces for parry.
 const hate={...profile,hatred:true};
 close(engine(hate,profile,noCrit).chance,3/8);
 close(engine(hate,profile,noCrit).outOfAction,1/8);
@@ -239,6 +240,20 @@ for(const target of [3,4,5]) {
   const faces=hitDice(target,true);
   close(faces.reduce((sum,[,p])=>sum+p,0),1);
   faces.forEach(([die,p])=>close(p,brute[die-1]));
+}
+// Independent end-to-end check: p(hit with hatred)=p+(1-p)*p.
+// Both weapons use the same rule; with S3/T3, no saves or parries, p(wound)=p(hit)/2.
+for(const [ws,target] of [[2,5],[3,4],[6,3]]) {
+  for(const hatred of [false,true]) {
+    const attacker={...profile,ws,hatred,a:3,secondary:'sword'};
+    const defender={...profile,ws:5};
+    const hit=(7-target)/6;
+    const perAttack=(hatred?hit+(1-hit)*hit:hit)/2;
+    const result=engine(attacker,defender,{parry:'classic',critical:'none',equipment:'standard'});
+    close(result.expected,4*perAttack);
+    close(result.chance,1-(1-perAttack)**4);
+    result.groups.forEach(group=>close(group.hitChance,hatred?hit+(1-hit)*hit:hit));
+  }
 }
 const naturalHatred=criticalOutcomes({family:'unarmed',saved:0,hit:4,hitChance:3/4,wound:4},'advanced');
 close(naturalHatred.filter(o=>o.amount===2).reduce((sum,o)=>sum+o.p,0),1/8);
