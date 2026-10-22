@@ -42,7 +42,11 @@ git clone git@github.com:jlpdiez/Mordheim-Laboratory.git
 cd Mordheim-Laboratory
 ```
 
-El repositorio es privado: para clonarlo necesitas una cuenta autorizada y acceso SSH a GitHub.
+También puedes clonarlo por HTTPS, sin configurar acceso SSH:
+
+```sh
+git clone https://github.com/jlpdiez/Mordheim-Laboratory.git
+```
 
 ### Servir en local
 
@@ -185,16 +189,12 @@ Las pruebas incluyen casos analíticos, normalización de distribuciones, armas,
 
 Si cambias una regla, añade o ajusta un caso de prueba y revisa también las explicaciones visibles en la web. Antes de compartir cambios, comprueba tanto los resultados del motor como los selectores y el comparador en el navegador.
 
-## 🌐 Publicación y acceso
+## 🌐 Despliegue
 
 Puedes alojar los archivos en un servicio de hosting estático. La carpeta raíz contiene `index.html`; no hay comando de compilación ni backend que desplegar.
 
-> [!WARNING]
-> **Un repositorio privado no convierte una web desplegada en privada.** El control de acceso depende del servicio de alojamiento y debe configurarse por separado. Si solo debe entrar un grupo de amigos, utiliza una solución que autentique a los visitantes, por ejemplo Cloudflare Pages con Cloudflare Access.
-
 Antes de publicar:
 
-- Decide si la web será pública o tendrá acceso restringido.
 - Revisa los permisos de distribución de las fuentes y de cualquier material que incorpores.
 - Comprueba que los enlaces no dependan de archivos locales no incluidos en el repositorio.
 - Comprueba las rutas, la carga de estilos y el funcionamiento en móvil.

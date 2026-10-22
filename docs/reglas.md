@@ -2,7 +2,7 @@
 
 Auditoría de las reglas implementadas en Mordheim Laboratory. Mordheimer se utilizará como referencia de contraste, sin asumir que recoge todas las variantes disponibles.
 
-**Estado inicial:** ninguna regla se considera verificada por la creación de este documento. Las descripciones del comportamiento actual documentan el modelo, no certifican su fidelidad al reglamento.
+Solo se consideran verificadas las reglas cuyo alcance, referencia y pruebas se documentan expresamente en una ficha. Las descripciones del comportamiento actual no certifican por sí solas su fidelidad al reglamento.
 
 ## Estados
 
@@ -21,7 +21,7 @@ Una ficha puede recoger varios estados para aspectos distintos. No se marcará u
 | Impactar y tabla de HA | ⬜ Pendiente | — |
 | Herir y tabla de F/R | ⬜ Pendiente | — |
 | Armadura y modificadores | ⬜ Pendiente | — |
-| Armas y equipo básico | ⬜ Pendiente | — |
+| Armas y equipo básico | ✅ Ataque adicional verificado; resto ⬜ pendiente | [Segunda arma](#segunda-arma-un-ataque-adicional) |
 | Equipo de campaña | ⬜ Pendiente | — |
 | Parada clásica | ⬜ Pendiente | [Ficha](#parada-clásica) |
 | Parada opcional | ⬜ Pendiente | — |
@@ -46,6 +46,53 @@ Una ficha puede recoger varios estados para aspectos distintos. No se marcará u
 Si una variante no aparece en Mordheimer, se deja pendiente de referencia propia: no se atribuye a ese sitio ni se elimina automáticamente.
 
 ## Fichas de revisión
+
+### Segunda arma: un ataque adicional
+
+**Estado:** ✅ Coincide, exclusivamente en el número y reparto de ataques con dos armas de una mano.
+
+**Referencia:** [Mordheimer · Close Combat · fighting with two weapons](https://mordheimer.net/docs/rules/close-combat#fighting-with-two-weapons).
+
+**Edición o variante de la referencia:** sección de reglas generales de combate cuerpo a cuerpo; no se han auditado variantes opcionales.
+
+**Fecha de consulta:** 2026-10-23.
+
+**Issue:** [#1 · Auditoría de reglas frente a Mordheimer](https://github.com/jlpdiez/Mordheim-Laboratory/issues/1).
+
+**Código principal:** `weapons.js`, función `attackGroups`; pruebas en `test.js`.
+
+#### Comportamiento actual y resultado del contraste
+
+Mordheimer indica que dos armas de una mano conceden **un ataque adicional**, añadido después de otros modificadores. Si las armas son distintas, se hace un ataque con una de ellas y el resto con la otra, resolviendo las tiradas por separado.
+
+El motor crea un grupo con `A` ataques de la principal y otro con exactamente un ataque de la secundaria ofensiva. Por tanto, `A=1` produce 2 ataques y `A=4` produce 5, no 8. La elección de qué arma realiza la mayoría de ataques se expresa mediante los selectores de principal y secundaria. La explicación de «01 / Impactar» y el README describen el mismo reparto.
+
+**Conclusión:** coincide para el alcance revisado. No ha sido necesario cambiar el motor ni la explicación de la interfaz.
+
+#### Variantes y límites pendientes
+
+- Esta revisión no valida reglas especiales de armas, restricciones de equipo, escudos de campaña, paradas ni críticos compartidos.
+- El atributo `A` se interpreta como el número final de ataques de la principal. No se ha auditado la interacción con Furia asesina ni con otros modificadores, que no se aplican automáticamente en esta prueba.
+- La resolución de la principal antes de la secundaria y sus interacciones con críticos quedan fuera de esta ficha.
+- No se declara verificado el bloque completo de armas y equipo.
+
+#### Pruebas de revisión
+
+- [x] Comprobar `A=1..6`: total `A+1`, grupo principal de `A` y secundario de 1.
+- [x] Comprobar una distribución independiente de heridas con HA3 contra HA3 y F3 contra R3, sin armadura, parada, Odio ni críticos.
+- [x] Para ese escenario, cada ataque causa una herida con probabilidad `(3/6) × (3/6) = 1/4`. Con `n=A+1`, la distribución esperada es binomial: `P(k)=C(n,k)(1/4)^k(3/4)^(n-k)`.
+- [x] Comprobar media `n/4` y probabilidad de al menos una herida `1-(3/4)^n` sin comparar el motor consigo mismo.
+- [x] Ejecutar la suite completa mediante `node test.js` y comprobar el diff con `git diff --check`.
+
+**Pruebas verificadas:** bloque «Dual wielding audit» de `test.js`.
+
+**Commit de resolución:** consultar el commit que introduce esta ficha y las pruebas con `git log --oneline -- docs/reglas.md test.js`.
+
+**Seguimiento en la issue:** pendiente de publicar; no se dispone de autenticación de escritura para la API de GitHub en esta sesión.
+
+Texto preparado para comentar en la issue:
+
+> Primera regla revisada: segunda arma de una mano = un ataque adicional. Coincide con Mordheimer, sección «fighting with two weapons». Verificada en el motor, README e interfaz. Añadidas pruebas para A=1..6 y distribución binomial independiente; suite completa correcta. No se ha cambiado el motor. El resto de armas, restricciones e interacciones sigue pendiente. Detalles y referencia en docs/reglas.md, ficha «Segunda arma: un ataque adicional».
 
 ### Parada clásica
 

@@ -92,9 +92,27 @@ for (const id of ['hit-table','wound-table','shooting-table']) {
   assert.ok(element(id).innerHTML.includes('--probability-hue:'));
   assert.ok(!element(id).innerHTML.includes('<small>'), 'Cells show only the die target');
 }
-// Dual wielding: A attacks on primary, exactly one on a damaging secondary.
+// Dual wielding audit: https://mordheimer.net/docs/rules/close-combat#fighting-with-two-weapons
+// One extra attack, added after modifiers: A=1..6 gives A primary + 1 secondary.
 const profile={...p,primary:'hand',secondary:'none'};
 const dual={...profile,secondary:'sword'};
+const auditedDualConfig={parry:'classic',critical:'none',equipment:'standard'};
+for(let attacks=1;attacks<=6;attacks++) {
+  const result=engine({...dual,a:attacks},profile,auditedDualConfig);
+  assert.equal(result.total,attacks+1);
+  assert.deepEqual(Array.from(result.groups,g=>[g.id,g.count]),[['hand',attacks],['sword',1]]);
+  // Equal WS and S/T, no save or parry: each attack wounds with (3/6)*(3/6)=1/4.
+  // Independent oracle: binomial distribution for n=A+1 attacks, not a second engine call.
+  const n=attacks+1;
+  let combinations=1;
+  for(let wounds=0;wounds<=n;wounds++) {
+    if(wounds) combinations=combinations*(n-wounds+1)/wounds;
+    close(result.distribution[wounds],combinations*(1/4)**wounds*(3/4)**(n-wounds));
+  }
+  close(result.expected,n/4);
+  close(result.chance,1-(3/4)**n);
+}
+
 const dualResult=engine(dual,profile,campaignConfig);
 close(dualResult.expected,engine({...profile,a:2},profile,campaignConfig).expected);
 close(dualResult.outOfAction,engine({...profile,a:2},profile,campaignConfig).outOfAction);
