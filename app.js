@@ -1,5 +1,5 @@
 'use strict';
-const defaults = () => ({ a: { ws: 3, s: 3, t: 3, a: 1, w: 1, save: 7, primary:'hand', secondary:'none', hardToKill: false, hatred:false }, b: { ws: 3, s: 3, t: 3, a: 1, w: 1, save: 6, primary:'hand', secondary:'none', hardToKill: false, hatred:false } });
+const defaults = () => ({ a: { ws: 3, s: 3, t: 3, a: 1, w: 1, save: 7, primary:'hand', secondary:'none', hardToKill: false, hatred:false }, b: { ws: 3, s: 3, t: 3, a: 1, w: 1, save: 7, primary:'hand', secondary:'none', hardToKill: false, hatred:false } });
 let state = defaults();
 const rules = { parry: 'classic', critical: 'basic', equipment: 'standard' };
 function parryObjects(p,equipment=rules.equipment) {
