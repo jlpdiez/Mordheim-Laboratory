@@ -1,11 +1,10 @@
 'use strict';
 const criticalModes={basic:'Críticos básicos',none:'Sin críticos',optional:'Críticos opcionales',advanced:'Críticos opcionales avanzados'};
-// Sources: Finiquitao, printed pp.181–182; Códice 2.0, printed pp.258–259.
 // Entries describe the ORIGINAL target only. Movement, other targets and later turns are not simulated.
 const criticalTables={
   blade:{name:'Armas de filo',rows:[['1–2','Herida leve','Una herida sin armadura.'],['3–4','Herida grave','Dos heridas; salvación separada para cada una.'],['5–6','¡Rebanado!','Dos heridas sin armadura y +2 en lesiones.']]},
   blunt:{name:'Armas contundentes',rows:[['1–2','Martillado','Herida normal; impide combatir este turno si aún no lo ha hecho.'],['3–4','Cachiporrazo','Una herida; ignora armadura y casco.'],['5','Barrido','Desarma. Tirada para herir y salvación normales.'],['6','Aplastado','Si falla armadura, fuera de combate automático, aunque le queden heridas.']]},
-  pole:{name:'Armas de asta',rows:[['1–2','Rasguño','Una herida con armadura normal y +1 en lesiones.'],['3–4','Ensartado','Herida normal y derribo.'],['5–6','Empalado','Una herida sin armadura y +2 en lesiones. Desplazamiento: 1D6 pulgadas en Finiquitao; 3D6 cm en Códice. Si choca con otra miniatura, esta recibe un impacto de F3.']]},
+  pole:{name:'Armas de asta',rows:[['1–2','Rasguño','Una herida con armadura normal y +1 en lesiones.'],['3–4','Ensartado','Herida normal y derribo.'],['5–6','Empalado','Una herida sin armadura y +2 en lesiones. Puede desplazar al objetivo y causar un impacto de F3 a otra miniatura si choca con ella. Estos efectos posicionales no se simulan.']]},
   unarmed:{name:'Combate sin armas',rows:[['1–2','Fuerte golpe','Herida normal y un ataque inmediato adicional: impactar, herir y salvar.'],['3–4','Golpe poderoso','Una herida con armadura normal y +1 en lesiones.'],['5–6','Golpe demoledor','Una herida sin armadura y +2 en lesiones.']]},
   missile:{name:'Armas de proyectiles',rows:[['1–2','Hueco','Una herida sin armadura.'],['3–4','Rebote','Herida normal; otro enemigo próximo también recibe un impacto.'],['5–6','Tiro maestro','Dos heridas sin armadura.']]},
   flexible:{name:'Armas flexibles',advancedOnly:true,rows:[['1–2','Atrapado','Herida normal y posible derribo por chequeo de Fuerza.'],['3–4','Latigazo','Dos heridas con armadura normal.'],['5','Desarmado','Desarma. Tirada para herir y salvación normales.'],['6','¡Ahogado!','Dos heridas sin armadura y +2 en lesiones.']]},

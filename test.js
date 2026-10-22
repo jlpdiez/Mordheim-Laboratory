@@ -133,7 +133,7 @@ vm.runInContext('swapFighters()',context);
 close(vm.runInContext('calculate(state.a,state.b).expected',context),reversed);
 vm.runInContext('swapFighters()',context);
 assert.equal(vm.runInContext('JSON.stringify(state)',context),before);
-// PDF-sourced optional tables: shared families agree in both books.
+// Optional critical tables: shared families agree in both variants.
 const criticalOutcomes=vm.runInContext('criticalOutcomes',context);
 const optional={...campaignConfig,critical:'optional'};
 const advanced={...campaignConfig,critical:'advanced'};

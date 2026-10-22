@@ -120,16 +120,11 @@ Para quedar fuera de combate se usa 5+ en lesiones, o 6+ con **Duro de matar**, 
 
 Las tablas opcionales incluyen efectos como salvaciones independientes por herida, modificadores a lesiones, repeticiones para herir, ataques adicionales y **Aplastado**, que puede dejar fuera de combate aunque queden heridas e ignora Duro de matar. No todos los efectos narrativos o posicionales de esas tablas se simulan.
 
-### Procedencia de las tablas y documentos no incluidos
+### Tablas integradas
 
-Las variantes opcionales toman como referencia el *Reglamento Mordheim Finiquitao* y el *Códice MORDHEIM 2.0*. Se citan como procedencia de las reglas, **no como archivos incluidos en el repositorio**.
+Las tablas y sus ramas de probabilidad están implementadas en `criticals.js` y pueden consultarse directamente en la herramienta.
 
-Las tablas y sus ramas de probabilidad están implementadas en `criticals.js`: **no necesitas ningún PDF para usar el simulador ni consultar las tablas integradas**. Los PDF y las capturas locales están excluidos mediante `.gitignore`.
-
-> [!NOTE]
-> La web no enlaza a los PDF ni los distribuye. Las menciones a los reglamentos identifican las fuentes de las reglas; las tablas de consulta están integradas en la propia herramienta.
-
-Las familias compartidas por ambas variantes coinciden en sus efectos de heridas, armadura y lesiones. Las diferencias de desplazamiento de Empalado no se simulan. La variante avanzada añade flexibles y tablas de accidentes; proyectiles, caídas, explosiones y atropellos se muestran solo como referencia.
+Las familias compartidas por ambas variantes coinciden en sus efectos de heridas, armadura y lesiones. Los desplazamientos de Empalado no se simulan. La variante avanzada añade flexibles y tablas de accidentes; proyectiles, caídas, explosiones y atropellos se muestran solo como referencia.
 
 ## ⚖️ Comparar mejoras sin confundir resultados
 
