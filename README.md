@@ -152,6 +152,10 @@ El laboratorio estudia **fases de ataques**, no una batalla completa ni un duelo
 
 Comprueba siempre las reglas, erratas y acuerdos de tu grupo. La herramienta ayuda a comparar probabilidades dentro de su modelo; no sustituye al reglamento ni resuelve todas las interacciones posibles.
 
+## 📋 Seguimiento de reglas
+
+La auditoría de reglas, variantes y simplificaciones se registra en **[docs/reglas.md](docs/reglas.md)**. El documento recoge los bloques pendientes, el método de contraste con Mordheimer y las fichas de revisión. Ninguna regla se considera verificada hasta completar su revisión y las pruebas correspondientes.
+
 ## 🗂️ Estructura del proyecto
 
 | Archivo | Responsabilidad |
