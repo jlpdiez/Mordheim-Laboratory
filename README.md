@@ -127,7 +127,7 @@ Las variantes opcionales toman como referencia el *Reglamento Mordheim Finiquita
 Las tablas y sus ramas de probabilidad están implementadas en `criticals.js`: **no necesitas ningún PDF para usar el simulador ni consultar las tablas integradas**. Los PDF y las capturas locales están excluidos mediante `.gitignore`.
 
 > [!NOTE]
-> La interfaz conserva dos enlaces «Abrir Finiquitao» y «Abrir Códice» a archivos PDF locales. En una copia limpia del repositorio o en un despliegue sin esos documentos, esos enlaces no funcionan. Esto no afecta a los cálculos ni a las referencias integradas.
+> La web no enlaza a los PDF ni los distribuye. Las menciones a los reglamentos identifican las fuentes de las reglas; las tablas de consulta están integradas en la propia herramienta.
 
 Las familias compartidas por ambas variantes coinciden en sus efectos de heridas, armadura y lesiones. Las diferencias de desplazamiento de Empalado no se simulan. La variante avanzada añade flexibles y tablas de accidentes; proyectiles, caídas, explosiones y atropellos se muestran solo como referencia.
 
@@ -197,7 +197,7 @@ Antes de publicar:
 
 - Decide si la web será pública o tendrá acceso restringido.
 - Revisa los permisos de distribución de las fuentes y de cualquier material que incorpores.
-- Retira o sustituye los enlaces a PDF no distribuidos.
+- Comprueba que los enlaces no dependan de archivos locales no incluidos en el repositorio.
 - Comprueba las rutas, la carga de estilos y el funcionamiento en móvil.
 - Ejecuta `node test.js`.
 
