@@ -1,0 +1,10 @@
+# Documentos de referencia y capturas locales: no publicar
+*.pdf
+Screenshot*.png
+
+# Archivos locales
+.DS_Store
+Thumbs.db
+node_modules/
+.env
+.env.*
